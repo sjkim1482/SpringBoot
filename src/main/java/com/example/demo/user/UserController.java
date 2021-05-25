@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,14 +36,22 @@ public class UserController {
 	
 	// GET /users/1 or /users/10
 	@GetMapping("/user/{id}")
-	public User retrieveUser(@PathVariable int id) {
+	public EntityModel<User> retrieveUser(@PathVariable int id) {
 		User user = service.findOne(id);
 		
 		if(user == null) {
 			throw new UserNotFoundException(String.format("ID[%s] 못찾았당", id));
 		}
+//		WebMvcLinkBuilder wmlb;
+		//HATEOAS
+//		Link link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).retrieveAllUsers()).withSelfRel();
+//		EntityModel<User> model = EntityModel.of(user,link);
+		EntityModel<User> model = EntityModel.of(user,WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).retrieveAllUsers()).withSelfRel());
+//		model.add(link.withRel("all-users"));
+//		EntityModel<User> model2 = new EntityModel<>(user);
+
+		return model;
 		
-		return user;
 	}
 	
 	//오브젝트 데이터를 받을때는 @RequestBody를 선언해줘야함

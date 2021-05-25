@@ -14,11 +14,26 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+  security:
+    user:
+      name: username
+      password: password
+  
   messages:
 #메세지 등록 messages라는 파일이름을 등록
     basename: message
+    
+  devtools:
+    livereload:
+      enabled: true
   
 logging:
   level:
-    '[org.springframework]': debug
+    '[org.springframework]': DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
     
