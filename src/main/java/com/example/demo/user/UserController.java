@@ -4,11 +4,14 @@ import java.net.URI;
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -42,7 +45,7 @@ public class UserController {
 	
 	//오브젝트 데이터를 받을때는 @RequestBody를 선언해줘야함
 	@PostMapping("/users")
-	public ResponseEntity<User> createUser(@RequestBody User user) {
+	public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
 		User saveUser = service.save(user);
 		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -52,7 +55,7 @@ public class UserController {
 		return ResponseEntity.created(location).build();
 	}
 	
-	@DeleteMapping("/deleteUser/{id}")
+	@DeleteMapping("/user/{id}")
 	public void deleteUser(@PathVariable int id) {
 		User user = service.deleteById(id);
 		
