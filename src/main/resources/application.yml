@@ -10,14 +10,18 @@ spring:
     url: jdbc:oracle:thin:@localhost:1521:xe
     username: SJK
     password: java
+#    hikari:
+#      connection-timeout: 60000
+#      maximum-pool-size: 5
+  
   mvc:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
-  security:
-    user:
-      name: username
-      password: password
+#  security:
+#    user:
+#      name: username
+#      password: password
   
   messages:
 #메세지 등록 messages라는 파일이름을 등록
@@ -25,6 +29,15 @@ spring:
     
   devtools:
     livereload:
+      enabled: true
+      
+#쿼리문 확인
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  h2:
+    console:
       enabled: true
   
 logging:

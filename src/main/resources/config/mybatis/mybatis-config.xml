@@ -6,13 +6,13 @@
 
 
   <typeAliases>
-<!--   	<typeAlias type="com.nsetec.model.EmpVo" alias="empVo" /> -->
+  	<typeAlias type="com.example.demo.emp.model.EmpVo" alias="empVo" />
 <!--   	<typeAlias type="com.nsetec.model.PageVo" alias="pageVo" /> -->
   </typeAliases>
 
 
   <mappers>
-<!-- 	  <mapper resource="com/nsetec/config/mybatis/mapper/emp.xml"/> -->
+	  <mapper resource="config/mybatis/mapper/emp.xml"/>
   </mappers>
   
   
